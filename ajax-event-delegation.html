@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#content{
+			padding:30px; background:#eeeeee;
+		}
+	</style>
+</head>
+<body>
+	<input id="btnLoad" type="button" value="Load Content">
+	<input id="btnAlert" type="button" value="alert URL of #img1">
+	<br>and then click on below image(s)
+	<div id="content"></div>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			//### This element (button) will load content to the container
+			$("#btnLoad").on("click", function(){
+				$.ajax("sample-content.html", {
+					success: function(response){
+						$("#content").html(response);
+					}
+				});
+			});
+
+			//### This element (button) depends on an element in the loaded content inside the container
+			//### jQuery will keep on listening to the element whenever it exists.
+			$("#btnAlert").on("click", function(){
+				alert("url: " + $("#img1").attr("src"));
+			});
+
+			//### This element (image) resides in the loaded content inside the container
+			//### jQuery will keep on listening to the element whenever it exists.
+			//### $("#content img").on("click", ...) will not work !!!
+			$("#content").on("click", "img", function(){
+				alert("url: " + $(this).attr("src"));
+			});
+		});
+	</script>
+</body>
+</html>
