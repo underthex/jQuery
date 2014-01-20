@@ -1,20 +1,13 @@
 
 $.fn.priceify = function(options){
     $(this).each(function(){
-        //### Using the $.extend() utility method to specify default value(s)
-        //### Also create a setting object to make variables look nice
         var settings = $.extend({
-            procedure: $(this), //variable from DOM element. see below
-            price: $(this).data('price'), //variable from DOM element. see below
+            procedure: $(this), //variable from DOM element.
+            price: $(this).data('price'), //variable from DOM element.
             day: 30, // Default
             discount: 0.05, // Default
             location: 'San Francisco, USA' //Default
-        }, options); //notice we need to pass options to overide defaults (if specified).
-
-        //### Settings object above has overide variables below.
-        //### From DOM Elements
-        //var procedure = $(this);
-        //var price = procedure.data('price');
+        }, options);
 
         var show = function(){
             var details = $('<p>Our promotional price is $' + settings.price * (1 - settings.discount) + '</p>' +
